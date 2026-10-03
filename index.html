@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For My Favorite Person 💌</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Great+Vibes&family=Playfair+Display&display=swap');
+:root{--m:#4b0f20;--d:#260711;--w:#64152b;--p:#fff8eb;--g:#c9a45b}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{background:radial-gradient(circle,#64152b,#4b0f20 50%,#260711);color:#f7ecd9;font-family:"Playfair Display",serif}
+.screen{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:24px;overflow:hidden}.screen.active{display:flex}
+.screen:before{content:"";position:absolute;inset:12px;border:1px solid #c9a45b45}
+h1,h2{font-family:"Cormorant Garamond",serif}button{font:inherit;cursor:pointer;border:1px solid #c9a45baa;background:var(--m);color:#f7ecd9;padding:12px 24px;border-radius:30px;transition:.3s}button:hover{transform:translateY(-2px);background:#68162e}
+.card{position:relative;z-index:2;width:min(92vw,850px);max-height:86vh;overflow:auto;padding:38px;background:linear-gradient(145deg,#fff9ed,#f3e4ca);color:#4b1725;border:1px solid var(--g);box-shadow:0 20px 70px #0007;scrollbar-width:none}.card::-webkit-scrollbar{display:none}
+.center{text-align:center}.small{opacity:.8;font-size:14px;letter-spacing:2px}.script{font-family:"Great Vibes",cursive}.paper-title{font-family:"Cormorant Garamond",serif;font-size:clamp(34px,6vw,58px);margin:5px 0 20px}
+.corner{position:absolute;color:var(--g);font-size:28px}.tl{top:12px;left:16px}.tr{top:12px;right:16px}.bl{bottom:12px;left:16px}.br{bottom:12px;right:16px}
+.intro{flex-direction:column;text-align:center}.intro h1{font-family:"Great Vibes",cursive;font-size:clamp(42px,9vw,78px);margin:0}
+.envelope-wrap{position:relative;width:300px;height:220px;margin:30px auto 22px;cursor:pointer;perspective:1000px}
+.envelope{position:absolute;inset:30px 0 0;background:#7a1d37;border-radius:4px;box-shadow:0 22px 45px #0007;overflow:hidden}.envelope:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,transparent 49%,#541126 50%),linear-gradient(215deg,transparent 49%,#541126 50%)}
+.flap{position:absolute;left:0;top:30px;width:0;height:0;border-left:150px solid transparent;border-right:150px solid transparent;border-top:105px solid #8f2845;transform-origin:top center;z-index:4;transition:1.15s cubic-bezier(.2,.8,.2,1)}
+.seal{position:absolute;z-index:6;left:50%;top:105px;transform:translate(-50%,-50%);width:55px;height:55px;border-radius:50%;background:var(--g);color:var(--m);display:grid;place-items:center;font-size:24px;transition:.7s}
+.letter-peek{position:absolute;z-index:3;left:20px;right:20px;top:55px;height:125px;background:var(--p);color:var(--m);padding:20px;font-family:"Great Vibes",cursive;font-size:25px;transition:1s;box-shadow:0 5px 18px #0004}
+.envelope-wrap.open .flap{transform:rotateX(180deg);z-index:2}.envelope-wrap.open .seal{opacity:0;transform:translate(-50%,-80%) scale(.5)}.envelope-wrap.open .letter-peek{transform:translateY(-125px);z-index:7}
+.letter{font-family:"Cormorant Garamond",serif;font-size:clamp(18px,2.4vw,23px);line-height:1.55}.letter p{margin:0 0 18px}
+.choices{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:25px 0}.choices button{min-width:110px}
+.bouquets{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin:35px 0}.bouquet{width:145px;padding:18px 10px;background:#fff8eb;border:1px solid #d2b06d;border-radius:10px;color:var(--m);cursor:pointer;transition:.3s}.bouquet:hover{transform:translateY(-8px);box-shadow:0 12px 25px #4b0f2030}.roses{font-size:45px;line-height:1.1;margin-bottom:10px}
+.credits-screen{background:linear-gradient(#260711,#4b0f20,#260711)}.credits-window{height:75vh;overflow:hidden;position:relative;width:min(700px,90vw);text-align:center}.credits{animation:credits 34s linear forwards;padding-top:75vh;font-family:"Cormorant Garamond",serif;font-size:27px;line-height:2.05}@keyframes credits{to{transform:translateY(-1900px)}}
+.certificate{border:8px double var(--g);padding:45px 30px;background:#fff8eb;text-align:center}.certificate h1{font-family:"Great Vibes",cursive;font-size:60px;margin:5px}.seal-gold{width:70px;height:70px;border-radius:50%;border:2px solid var(--g);display:grid;place-items:center;margin:22px auto;color:var(--g);font-size:28px}
+.record{width:230px;height:230px;border-radius:50%;margin:25px auto;background:repeating-radial-gradient(circle,#181116 0 3px,#252027 4px 6px);border:8px solid #111;display:grid;place-items:center;animation:spin 6s linear infinite paused}.record.playing{animation-play-state:running}.record:after{content:"♥";display:grid;place-items:center;width:70px;height:70px;border-radius:50%;background:var(--g);color:var(--m);font-size:30px}@keyframes spin{to{transform:rotate(360deg)}}
+.modal{position:fixed;inset:0;background:#16030ae8;display:none;align-items:center;justify-content:center;z-index:99;padding:20px}.modal.show{display:flex}.modal-box{background:#fff8eb;color:var(--m);padding:18px;border:1px solid var(--g);max-width:720px;width:95%;text-align:center}video{max-width:100%;max-height:65vh}
+.end-title{font-family:"Great Vibes",cursive;font-size:clamp(52px,11vw,95px);margin:10px}
+.particle{position:absolute;color:#c9a45b70;animation:float 7s linear infinite;pointer-events:none}@keyframes float{0%{transform:translateY(110vh);opacity:0}15%{opacity:1}100%{transform:translateY(-15vh) rotate(360deg);opacity:0}}
+@media(max-width:600px){.card{padding:28px 22px}.envelope-wrap{transform:scale(.85)}.credits{font-size:23px}.certificate h1{font-size:46px}}
+</style>
+</head>
+<body>
+<div id="particles"></div>
+
+<section class="screen active intro" id="s1">
+<div><div class="small">A LITTLE SOMETHING FOR YOU</div><h1>For my favorite person</h1>
+<div class="envelope-wrap" id="envelope" onclick="openEnvelope()"><div class="letter-peek">To my favorite person 💌</div><div class="envelope"></div><div class="flap"></div><div class="seal">♥</div></div>
+<div class="small">tap the envelope to open it</div></div>
+</section>
+
+<section class="screen" id="s2"><div class="card">
+<span class="corner tl">❦</span><span class="corner tr">✦</span><div class="small">A LETTER FROM ME TO YOU</div>
+<h1 class="paper-title">To my favorite person💌</h1><div class="letter">
+<p>I don't even know where to start because there are so many things I want to say.
+You came into my life at a time when I had already decided that I don't want to love anyone. I wasn't looking for anyone, I wasn't expecting anyone and honestly I never thought someone would come into my life like you did. But somehow you came, and without even realizing it, you changed so many things for me.</p>
+<p>I still can't believe that you were actually my first sight crush ,I remember seeing you on the stage at that marriage and you didn't even see me. I don't even know what happened that day but somehow you just caught my attention. And then when I came to school and realized that you were in my school too... I still can't forget that day. That day I became so much delulu😭🤌🏻</p>
+<p>I never thought that the person I randomly noticed that day would become someone this important to me🙌🏻</p>
+<p>Those little efforts you make. Even when it's something small, I notice it and it means a lot to me.
+And thank you for being there for me. Especially when I was at my lowest and when I felt like nobody was really there. You stayed. You listened to me, you supported me and somehow you made things feel a little easier just by being there❤️‍🩹</p>
+<p>Even when we're not actually together, your presence still feels close to me. Like you're always somewhere in my mind. And if someone ever asks me how many times I think about you in a day, I honestly don't even know what to say.
+Because you came once and never left from my mind!!!</p>
+<p>And you're not just my boyfriend. You're literally my best crime partner  The person I can be completely stupid with, laugh about random things with, and talk about literally anything with🫠</p>
+<p>You're probably the most comfortable person I have. I can tell you the most random things that happen to me, even things I'm embarrassed to tell anyone else. Somehow I can just tell you everything.
+I don't even have to think too much before talking to you. I can just be me.
+And I think that's one of the things I love the most about us💖</p>
+<p>I don't have to pretend to be a different person around you I can be annoying, dramatic, stupid, emotional, happy, quiet, whatever and you're still there.
+Thank you for staying, for listening, for supporting me and for simply being you and thankyou for coming into my life💘✨</p>
+<p>I hope you always know that you are very, very special to me love youu🫶🏻🫵🏻</p>
+<p>Happy Boyfriend's day, My love💗🫂💋</p>
+</div><div class="center"><button onclick="go(3)">Continue ✦</button></div>
+</div></section>
+
+<section class="screen" id="s3"><div class="card center"><div class="small">ONE VERY IMPORTANT QUESTION</div><h2 class="paper-title">Do you love me?</h2><div class="choices"><button onclick="go(4)">YES 💗</button><button id="noBtn" onmouseover="noAnswer()">NO 🙃</button></div><div class="small">choose carefully...</div></div></section>
+<section class="screen" id="s4"><div class="card center"><div class="small">I KNEW IT</div><h1 class="paper-title">You chose YES 🥹💗</h1><p style="font-family:Cormorant Garamond;font-size:23px">Okay... now I have something else waiting for you.</p><button onclick="go(6)">Continue ✦</button></div></section>
+
+<section class="screen" id="s6"><div class="card center"><div class="small">A LITTLE CHOICE FOR YOU</div><h2 class="paper-title">Pick a bouquet 🌹</h2><p>Any one you choose will take you to the next surprise.</p><div class="bouquets">
+<div class="bouquet" onclick="chooseBouquet()"><div class="roses">🤍🌹<br>🌿</div><b>White</b></div>
+<div class="bouquet" onclick="chooseBouquet()"><div class="roses">❤️🌹<br>🌿</div><b>Red</b></div>
+<div class="bouquet" onclick="chooseBouquet()"><div class="roses">🩷🌹<br>🌿</div><b>Pink</b></div>
+</div></div></section>
+
+<section class="screen credits-screen" id="s7"><div class="credits-window"><div class="credits">
+<div>MY LOVE</div><div>MY FAVORITE PERSON</div><div>MY BOY</div><div>MY PARTNER IN CRIME</div><div>MY SAFE PERSON</div><div>MY BEST CONVERSATION</div><div>MY FAVORITE NOTIFICATION</div><div>THE PERSON WHO MAKES ME SMILE</div><div>THE ONE I THINK ABOUT TOO MUCH 😭</div><div>THE ONE WHO STAYED</div><div>THE ONE WHO LISTENS</div><div>THE ONE WHO MAKES ORDINARY DAYS SPECIAL</div><div>MY FAVORITE “WHAT IF” THAT BECAME REAL</div><div>MY FIRST SIGHT CRUSH</div><div>MY MOST DELULU STORY</div><div>MY BEST CRIME PARTNER</div><div>THE PERSON I CAN BE MYSELF WITH</div><div>THE PERSON WHO CAME AND NEVER LEFT MY MIND</div><div>AND SOMEHOW...</div><div>MY FAVORITE PERSON EVER 💗</div>
+</div></div><button style="position:absolute;bottom:35px" onclick="go(8)">Continue ✦</button></section>
+
+<section class="screen" id="s8"><div class="card center"><div class="small">WAIT...</div><h2 class="paper-title">Do you want a gift? 🎁</h2><p style="font-family:Cormorant Garamond;font-size:22px">I may have prepared something little for you...</p><button onclick="go(9)">YES, PLEASE 🎁</button></div></section>
+
+<section class="screen" id="s9"><div class="card certificate"><div class="small">OFFICIALLY AWARDED TO</div><h1>Best Boyfriend Award</h1><p style="font-family:Cormorant Garamond;font-size:23px">This certificate is proudly presented to</p><h2 style="font-family:Great Vibes,cursive;font-size:48px;color:#64152b">My Favorite Person</h2><p style="font-family:Cormorant Garamond;font-size:21px;line-height:1.6">For being my love, my best crime partner, my safe person, and for making my little world a lot more special.</p><div class="seal-gold">♥</div><p class="small">VALID FOREVER ✦ NO EXPIRATION DATE</p><button onclick="go(10)">Next ✦</button></div></section>
+
+<section class="screen" id="s10"><div class="card center"><div class="small">A SONG FOR YOU</div><h2 class="paper-title">I Wanna Be Yours</h2><p>Arctic Monkeys</p><div class="record" id="record"></div><audio id="song" src="media/song.mp3"></audio><button onclick="toggleMusic()">Play / Pause ♫</button><p class="small" style="margin-top:18px">Add your legally obtained <b>song.mp3</b> to the media folder.</p><button onclick="go(11)">Continue ✦</button></div></section>
+
+<section class="screen" id="s11"><div class="card center"><div class="small">ONE LAST THING...</div><h2 class="paper-title">A little surprise 🎁</h2><p style="font-family:Cormorant Garamond;font-size:22px">Click when you're ready.</p><button onclick="showVideo()">Open my surprise 💗</button></div></section>
+<section class="screen" id="s12"><div class="center"><div class="small">THE END?</div><h1 class="end-title">Nope. 💗</h1><div style="font-family:Cormorant Garamond;font-size:23px">Just the end of this little website.</div><p style="font-family:Great Vibes,cursive;font-size:36px;color:var(--g)">Happy Boyfriend's Day, My love</p><div class="small">made just for you ✦</div></div></section>
+
+<div class="modal" id="videoModal"><div class="modal-box"><div class="small">JUST FOR YOU 💗</div><video id="video" controls playsinline src="media/cat-kissing.mp4"></video><br><button onclick="closeVideo()">Close ✦</button></div></div>
+
+<script>
+function go(n){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById("s"+n).classList.add("active");}
+function openEnvelope(){let e=document.getElementById("envelope");if(e.classList.contains("open"))return;e.classList.add("open");setTimeout(()=>go(2),1800)}
+function noAnswer(){let b=document.getElementById("noBtn");b.style.transform=`translate(${Math.random()*180-90}px,${Math.random()*100-50}px)`}
+function chooseBouquet(){go(7)}
+function toggleMusic(){let a=document.getElementById("song"),r=document.getElementById("record");if(a.paused){a.play().catch(()=>{});r.classList.add("playing")}else{a.pause();r.classList.remove("playing")}}
+function showVideo(){document.getElementById("videoModal").classList.add("show");document.getElementById("video").play().catch(()=>{})}
+function closeVideo(){let v=document.getElementById("video");v.pause();v.currentTime=0;document.getElementById("videoModal").classList.remove("show");go(12)}
+function particles(){for(let i=0;i<3;i++){let p=document.createElement("div");p.className="particle";p.textContent=["✦","♡","·"][Math.floor(Math.random()*3)];p.style.left=Math.random()*100+"vw";p.style.animationDelay=Math.random()*2+"s";document.body.appendChild(p);setTimeout(()=>p.remove(),7000)}}
+setInterval(particles,1800);particles();
+</script>
+</body></html>
